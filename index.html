@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Кирсанова | Креативный Разработчик</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <script src="copmonents/navbar.js"></script>
+    <script src="copmonents/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: {
+                            purple: '#c770f0',
+                            pink: '#f07af0',
+                        },
+                        dark: {
+                            900: '#0b0b0f',
+                            800: '#121218',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 6s infinite',
+                        'text-glow': 'text-glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'text-glow': {
+                            '0%': { 'text-shadow': '0 0 5px rgba(199, 112, 240, 0.5)' },
+                            '100%': { 'text-shadow': '0 0 20px rgba(199, 112, 240, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-900 text-white font-sans overflow-x-hidden">
+    <!-- Invert cursor circle -->
+    <div id="cursor-invert" class="cursor-invert"></div>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <!-- Noise overlay -->
+        <div class="loading-noise"></div>
+        
+        <!-- Floating particles -->
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- Main loader content -->
+        <div class="loader-content">
+            <!-- Central ring with glow -->
+            <div class="loader-ring">
+                <svg class="ring-svg" viewBox="0 0 100 100">
+                    <!-- Outer glow ring -->
+                    <circle class="ring-glow" cx="50" cy="50" r="45" />
+                    <!-- Main ring -->
+                    <circle class="ring-main" cx="50" cy="50" r="45" />
+                    <!-- Progress ring -->
+                    <circle class="ring-progress" cx="50" cy="50" r="45" />
+                </svg>
+                
+                <!-- Inner geometric shape -->
+                <div class="loader-inner">
+                    <div class="inner-shape"></div>
+                </div>
+            </div>
+            
+            <!-- Loading text -->
+            <div class="loader-text">
+                <span class="loader-letter" style="--i: 0">З</span>
+                <span class="loader-letter" style="--i: 1">А</span>
+                <span class="loader-letter" style="--i: 2">Г</span>
+                <span class="loader-letter" style="--i: 3">Р</span>
+                <span class="loader-letter" style="--i: 4">У</span>
+                <span class="loader-letter" style="--i: 5">З</span>
+                <span class="loader-letter" style="--i: 6">К</span>
+                <span class="loader-letter" style="--i: 7">А</span>
+                <span class="loader-letter loader-space" style="--i: 8">&nbsp;</span>
+                <span class="loader-letter" style="--i: 9">.</span>
+                <span class="loader-letter" style="--i: 10">.</span>
+                <span class="loader-letter" style="--i: 11">.</span>
+            </div>
+            
+            <!-- Progress percentage -->
+            <div class="loader-percentage">
+                <span id="loading-percent">0</span>%
+            </div>
+        </div>
+        
+        <!-- Flash overlay for transition -->
+        <div class="loading-flash"></div>
+    </div>
+
+    <!-- Main content wrapper for zoom effect -->
+    <div id="main-content" class="main-content-zoom">
+
+    <custom-navbar></custom-navbar>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-neon-purple opacity-20 blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-neon-pink opacity-20 blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 py-24 flex flex-col lg:flex-row items-center justify-between relative z-10">
+            <div class="lg:w-1/2 mb-16 lg:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="block opacity-70">Привет, я</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">АНАСТАСИЯ КИРСАНОВА</span>
+                    <span class="block text-xl md:text-2xl opacity-70 mt-2">Разработчик</span>
+                </h1>
+                <a href="#about" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full font-medium hover:shadow-lg hover:shadow-neon-purple/30 transition-all duration-300">
+                    Узнать больше
+                </a>
+            </div>
+            
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="relative w-80 h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
+                    <!-- Слоган за аватаром -->
+                    <div class="absolute inset-0 flex items-center justify-center -z-5 pointer-events-none">
+                        <h2 class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold opacity-15 tracking-widest text-white text-center leading-tight" style="text-shadow: 0 0 30px rgba(199, 112, 240, 0.6), 0 0 60px rgba(199, 112, 240, 0.4), 0 0 90px rgba(199, 112, 240, 0.2);">
+                            A CREATIVE<br><span class="text-neon-purple" style="text-shadow: 0 0 30px rgba(199, 112, 240, 0.8), 0 0 60px rgba(199, 112, 240, 0.6), 0 0 90px rgba(199, 112, 240, 0.4);">DEVELOPER</span>
+                        </h2>
+                    </div>
+                    <div id="avatar-container" class="w-full h-full cursor-grab active:cursor-grabbing relative z-10"></div>
+                    <!-- Glow effect behind character -->
+                    <div class="absolute inset-0 -z-10 bg-gradient-radial from-neon-purple/20 via-transparent to-transparent blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">Обо мне</span>
+            </h2>
+            
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-lg md:text-xl opacity-80 mb-8">
+                    Мне 20 лет, я разработчик, увлечённый созданием современных, масштабируемых и интеллектуальных цифровых продуктов.
+                    Люблю изучать новые технологии и постоянно совершенствовать свои навыки.
+                </p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                    <div class="bg-dark-900/50 backdrop-blur-sm p-4 rounded-lg border border-dark-800 hover:border-neon-purple/30 transition-all duration-300">
+                        <i data-feather="code" class="w-8 h-8 mx-auto text-neon-purple mb-2"></i>
+                        <h3 class="font-medium">Разработчик</h3>
+                    </div>
+                    <div class="bg-dark-900/50 backdrop-blur-sm p-4 rounded-lg border border-dark-800 hover:border-neon-purple/30 transition-all duration-300">
+                        <i data-feather="cpu" class="w-8 h-8 mx-auto text-neon-purple mb-2"></i>
+                        <h3 class="font-medium">Энтузиаст ИИ</h3>
+                    </div>
+                    <div class="bg-dark-900/50 backdrop-blur-sm p-4 rounded-lg border border-dark-800 hover:border-neon-purple/30 transition-all duration-300">
+                        <i data-feather="book" class="w-8 h-8 mx-auto text-neon-purple mb-2"></i>
+                        <h3 class="font-medium">Студентка 3 курса</h3>
+                    </div>
+                    <div class="bg-dark-900/50 backdrop-blur-sm p-4 rounded-lg border border-dark-800 hover:border-neon-purple/30 transition-all duration-300">
+                        <i data-feather="trending-up" class="w-8 h-8 mx-auto text-neon-purple mb-2"></i>
+                        <h3 class="font-medium">Быстро учусь</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">Мои навыки</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Hard Skills -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="code" class="mr-2 text-neon-purple"></i>
+                        Технические навыки
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="skill-card">
+                            <h4>Python</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h4>C++</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h4>HTML/CSS</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Java</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="user" class="mr-2 text-neon-purple"></i>
+                        Личные качества
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag">Коммуникабельность</span>
+                        <span class="skill-tag">Адаптивность</span>
+                        <span class="skill-tag">Трудолюбие</span>
+                        <span class="skill-tag">Увлечённость технологиями</span>
+                        <span class="skill-tag">Решение проблем</span>
+                        <span class="skill-tag">Командный игрок</span>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4">Образование и сертификаты</h4>
+                        <div class="space-y-4">
+                            <div class="bg-dark-800/50 p-4 rounded-lg border-l-4 border-neon-purple">
+                                <h5 class="font-medium">Прикладная математика и информатика (ИИ)</h5>
+                                <p class="text-sm opacity-70">Студентка 3 курса</p>
+                            </div>
+                            <div class="bg-dark-800/50 p-4 rounded-lg border-l-4 border-neon-purple certificate-card">
+                                <h5 class="font-medium">Сертификат Яндекса</h5>
+                                <p class="text-sm opacity-70">Backend-разработчик</p>
+                                <img src="IMG_5085.jpg" alt="Сертификат Яндекса" class="certificate-preview">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">Мои проекты</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card">
+                    <div class="project-image project-carousel" data-project="jurmak">
+                        <img src="1jur.png" alt="JurMak Screenshot 1" class="carousel-image active" onclick="openLightbox('jurmak', 0)">
+                        <img src="2jur.png" alt="JurMak Screenshot 2" class="carousel-image" onclick="openLightbox('jurmak', 1)">
+                        <img src="3jur.png" alt="JurMak Screenshot 3" class="carousel-image" onclick="openLightbox('jurmak', 2)">
+                        <img src="4jur.png" alt="JurMak Screenshot 4" class="carousel-image" onclick="openLightbox('jurmak', 3)">
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev" onclick="changeSlide('jurmak', -1)">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide('jurmak', 1)">❯</button>
+                        </div>
+                        <div class="carousel-dots" id="jurmak-dots">
+                            <span class="dot active" onclick="goToSlide('jurmak', 0)"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 1)"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 2)"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 3)"></span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>JurMak</h3>
+                        <p>Архитектура сервисов на Node.js/Express + React: монетизация, AI-анализ документов (Claude API), чат и сравнение файлов. Система логирования, тестовая архитектура, CI/CD и мониторинг</p>
+                        <div class="project-tech">
+                            <span>Node.js</span>
+                            <span>React</span>
+                            <span>MySQL</span>
+                            <span>Claude API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image project-carousel" data-project="foodgram">
+                        <img src="food1.png" alt="Foodgram Screenshot 1" class="carousel-image active" onclick="openLightbox('foodgram', 0)">
+                        <img src="food2.png" alt="Foodgram Screenshot 2" class="carousel-image" onclick="openLightbox('foodgram', 1)">
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev" onclick="changeSlide('foodgram', -1)">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide('foodgram', 1)">❯</button>
+                        </div>
+                        <div class="carousel-dots" id="foodgram-dots">
+                            <span class="dot active" onclick="goToSlide('foodgram', 0)"></span>
+                            <span class="dot" onclick="goToSlide('foodgram', 1)"></span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Foodgram</h3>
+                        <p>Самостоятельная разработка социальной сети рецептов: REST API, система авторизации, Docker-инфраструктура и CI/CD пайплайн</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Django</span>
+                            <span>React</span>
+                            <span>Docker</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image project-carousel" data-project="neonplaner">
+                        <img src="NP1.jpg" alt="NEON PLANER Screenshot 1" class="carousel-image active" onclick="openLightbox('neonplaner', 0)">
+                        <img src="NP2.jpg" alt="NEON PLANER Screenshot 2" class="carousel-image" onclick="openLightbox('neonplaner', 1)">
+                        <img src="NP3.jpg" alt="NEON PLANER Screenshot 3" class="carousel-image" onclick="openLightbox('neonplaner', 2)">
+                        <img src="NP4.jpg" alt="NEON PLANER Screenshot 4" class="carousel-image" onclick="openLightbox('neonplaner', 3)">
+                        <img src="NP5.jpg" alt="NEON PLANER Screenshot 5" class="carousel-image" onclick="openLightbox('neonplaner', 4)">
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev" onclick="changeSlide('neonplaner', -1)">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide('neonplaner', 1)">❯</button>
+                        </div>
+                        <div class="carousel-dots" id="neonplaner-dots">
+                            <span class="dot active" onclick="goToSlide('neonplaner', 0)"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 1)"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 2)"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 3)"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 4)"></span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>NEON PLANER</h3>
+                        <p>Telegram Mini App для планирования: расписание, to-do листы, сохранение ссылок и мини-игры. Tailwind CSS, LocalStorage, Telegram Web App API</p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>Tailwind</span>
+                            <span>Telegram API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section py-2 overflow-hidden bg-dark-800">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+                <span>ЧЕМ ДАЛЬШЕ — ТЕМ ЛУЧШЕ</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">Связаться со мной</span>
+            </h2>
+            
+            <div class="flex flex-col items-center text-center">
+                <h3 class="text-xl font-bold mb-6">Контактная информация</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-center">
+                        <i data-feather="mail" class="mr-3 text-neon-purple"></i>
+                        <span>zerkof7@gmail.com</span>
+                    </li>
+                    <li class="flex items-center justify-center">
+                        <i data-feather="github" class="mr-3 text-neon-purple"></i>
+                        <a href="https://github.com/KaRameLkA-jpg" target="_blank" class="hover:text-neon-purple transition-colors">KaRameLkA-jpg</a>
+                    </li>
+                    <li class="flex items-center justify-center">
+                        <i data-feather="send" class="mr-3 text-neon-purple"></i>
+                        <a href="https://t.me/nastysha_kirs" target="_blank" class="hover:text-neon-purple transition-colors">@nastysha_kirs</a>
+                    </li>
+                </ul>
+                
+                <a href="Kirsanova_Anastasia.docx" download class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full font-medium hover:shadow-lg hover:shadow-neon-purple/30 transition-all duration-300">
+                    <i data-feather="download" class="inline mr-2"></i> Скачать резюме
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </div> <!-- End of main-content-zoom wrapper -->
+
+    <custom-footer></custom-footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-btn prev" onclick="changeLightboxSlide(-1); event.stopPropagation();">❮</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Lightbox Image">
+        </div>
+        <button class="lightbox-btn next" onclick="changeLightboxSlide(1); event.stopPropagation();">❯</button>
+        <div class="lightbox-dots" id="lightbox-dots"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
