@@ -218,7 +218,7 @@
                             </div>
                         </div>
                         <div class="skill-card">
-                            <h4>Java</h4>
+                            <h4>JavaScript</h4>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 60%"></div>
                             </div>
@@ -268,24 +268,24 @@
             </h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card">
-                    <div class="project-image project-carousel" data-project="jurmak">
-                        <img src="1jur.png" alt="JurMak Screenshot 1" class="carousel-image active" onclick="openLightbox('jurmak', 0)">
-                        <img src="2jur.png" alt="JurMak Screenshot 2" class="carousel-image" onclick="openLightbox('jurmak', 1)">
-                        <img src="3jur.png" alt="JurMak Screenshot 3" class="carousel-image" onclick="openLightbox('jurmak', 2)">
-                        <img src="4jur.png" alt="JurMak Screenshot 4" class="carousel-image" onclick="openLightbox('jurmak', 3)">
-                        <div class="carousel-controls">
-                            <button class="carousel-btn prev" onclick="changeSlide('jurmak', -1)">❮</button>
-                            <button class="carousel-btn next" onclick="changeSlide('jurmak', 1)">❯</button>
+                <a href="https://jurmak.ru" target="_blank" class="project-card" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
+                    <div class="project-image project-carousel" data-project="jurmak" onclick="event.preventDefault();">
+                        <img src="1jur.png" alt="JurMak Screenshot 1" class="carousel-image active" onclick="openLightbox('jurmak', 0); event.preventDefault(); event.stopPropagation();">
+                        <img src="2jur.png" alt="JurMak Screenshot 2" class="carousel-image" onclick="openLightbox('jurmak', 1); event.preventDefault(); event.stopPropagation();">
+                        <img src="3jur.png" alt="JurMak Screenshot 3" class="carousel-image" onclick="openLightbox('jurmak', 2); event.preventDefault(); event.stopPropagation();">
+                        <img src="4jur.png" alt="JurMak Screenshot 4" class="carousel-image" onclick="openLightbox('jurmak', 3); event.preventDefault(); event.stopPropagation();">
+                        <div class="carousel-controls" onclick="event.stopPropagation();">
+                            <button class="carousel-btn prev" onclick="changeSlide('jurmak', -1); event.preventDefault(); event.stopPropagation();">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide('jurmak', 1); event.preventDefault(); event.stopPropagation();">❯</button>
                         </div>
-                        <div class="carousel-dots" id="jurmak-dots">
-                            <span class="dot active" onclick="goToSlide('jurmak', 0)"></span>
-                            <span class="dot" onclick="goToSlide('jurmak', 1)"></span>
-                            <span class="dot" onclick="goToSlide('jurmak', 2)"></span>
-                            <span class="dot" onclick="goToSlide('jurmak', 3)"></span>
+                        <div class="carousel-dots" id="jurmak-dots" onclick="event.stopPropagation();">
+                            <span class="dot active" onclick="goToSlide('jurmak', 0); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 1); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 2); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('jurmak', 3); event.preventDefault(); event.stopPropagation();"></span>
                         </div>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content" onclick="event.stopPropagation();">
                         <h3>JurMak</h3>
                         <p>Архитектура сервисов на Node.js/Express + React: монетизация, AI-анализ документов (Claude API), чат и сравнение файлов. Система логирования, тестовая архитектура, CI/CD и мониторинг</p>
                         <div class="project-tech">
@@ -295,7 +295,7 @@
                             <span>Claude API</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 
                 <div class="project-card">
                     <div class="project-image project-carousel" data-project="foodgram">
@@ -322,26 +322,26 @@
                     </div>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-image project-carousel" data-project="neonplaner">
-                        <img src="NP1.jpg" alt="NEON PLANER Screenshot 1" class="carousel-image active" onclick="openLightbox('neonplaner', 0)">
-                        <img src="NP2.jpg" alt="NEON PLANER Screenshot 2" class="carousel-image" onclick="openLightbox('neonplaner', 1)">
-                        <img src="NP3.jpg" alt="NEON PLANER Screenshot 3" class="carousel-image" onclick="openLightbox('neonplaner', 2)">
-                        <img src="NP4.jpg" alt="NEON PLANER Screenshot 4" class="carousel-image" onclick="openLightbox('neonplaner', 3)">
-                        <img src="NP5.jpg" alt="NEON PLANER Screenshot 5" class="carousel-image" onclick="openLightbox('neonplaner', 4)">
-                        <div class="carousel-controls">
-                            <button class="carousel-btn prev" onclick="changeSlide('neonplaner', -1)">❮</button>
-                            <button class="carousel-btn next" onclick="changeSlide('neonplaner', 1)">❯</button>
+                <a href="https://t.me/neonplaner_bot" target="_blank" class="project-card" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
+                    <div class="project-image project-carousel" data-project="neonplaner" onclick="event.preventDefault();">
+                        <img src="NP1.jpg" alt="NEON PLANER Screenshot 1" class="carousel-image active" onclick="openLightbox('neonplaner', 0); event.preventDefault(); event.stopPropagation();">
+                        <img src="NP2.jpg" alt="NEON PLANER Screenshot 2" class="carousel-image" onclick="openLightbox('neonplaner', 1); event.preventDefault(); event.stopPropagation();">
+                        <img src="NP3.jpg" alt="NEON PLANER Screenshot 3" class="carousel-image" onclick="openLightbox('neonplaner', 2); event.preventDefault(); event.stopPropagation();">
+                        <img src="NP4.jpg" alt="NEON PLANER Screenshot 4" class="carousel-image" onclick="openLightbox('neonplaner', 3); event.preventDefault(); event.stopPropagation();">
+                        <img src="NP5.jpg" alt="NEON PLANER Screenshot 5" class="carousel-image" onclick="openLightbox('neonplaner', 4); event.preventDefault(); event.stopPropagation();">
+                        <div class="carousel-controls" onclick="event.stopPropagation();">
+                            <button class="carousel-btn prev" onclick="changeSlide('neonplaner', -1); event.preventDefault(); event.stopPropagation();">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide('neonplaner', 1); event.preventDefault(); event.stopPropagation();">❯</button>
                         </div>
-                        <div class="carousel-dots" id="neonplaner-dots">
-                            <span class="dot active" onclick="goToSlide('neonplaner', 0)"></span>
-                            <span class="dot" onclick="goToSlide('neonplaner', 1)"></span>
-                            <span class="dot" onclick="goToSlide('neonplaner', 2)"></span>
-                            <span class="dot" onclick="goToSlide('neonplaner', 3)"></span>
-                            <span class="dot" onclick="goToSlide('neonplaner', 4)"></span>
+                        <div class="carousel-dots" id="neonplaner-dots" onclick="event.stopPropagation();">
+                            <span class="dot active" onclick="goToSlide('neonplaner', 0); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 1); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 2); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 3); event.preventDefault(); event.stopPropagation();"></span>
+                            <span class="dot" onclick="goToSlide('neonplaner', 4); event.preventDefault(); event.stopPropagation();"></span>
                         </div>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content" onclick="event.stopPropagation();">
                         <h3>NEON PLANER</h3>
                         <p>Telegram Mini App для планирования: расписание, to-do листы, сохранение ссылок и мини-игры. Tailwind CSS, LocalStorage, Telegram Web App API</p>
                         <div class="project-tech">
@@ -350,7 +350,7 @@
                             <span>Telegram API</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
